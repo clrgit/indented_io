@@ -1,0 +1,19 @@
+
+TODO
+  o Check if IO object is writable - no good solution ?
+  o better name for @this_indent ? 'string' ?
+
+  + explain bol
+  + Allow a symbolic :string argument
+  + #printf !
+  + Make IndentedIO a pseudo IO object and forward to the root object
+  + Clean-up ugliness in IndentedIO#initialize
+  + Move bol to global
+  + Handle negative indent level
+  + #indent without block
+  + StringIO#indent !
+  + Rename Device -> IndentedIO
+
+  - Make Kernel.indent behave like Kernel ?
+
+  ? Create a BaseIndentedIO class ?
