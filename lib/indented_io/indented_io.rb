@@ -23,11 +23,6 @@ module IndentedIO
       interface_indent(levels, string, bol: bol, &block)
     end
 
-    # Current level
-    def level
-      @level ||= @levels + (parent.is_a?(::IndentedIO::IndentedIO) ? parent.level : 0)
-    end
-
     # Indent and print args to the underlying device. #print has the same semantic
     # as Kernel#print
     def print(*args)
@@ -117,6 +112,11 @@ module IndentedIO
     # Set Beginning-Of-Line to true or false
     def bol=(bol)
       @base.instance_variable_set(:@bol, bol) # @bol only exists in the #base object
+    end
+
+    # Current level
+    def level
+      @level ||= @levels + (parent.is_a?(::IndentedIO::IndentedIO) ? parent.level : 0)
     end
 
     # Hide new

@@ -25,7 +25,7 @@ describe IndentedIO::IndentedIO do
       dev.indent(1, ">>").print "Hello"
       expect(res).to eq(">>Hello")
     end
-    it "doesn't allow negativ levels" do
+    it "doesn't allow negative levels" do
       expect { dev.indent(-1, "") }.to raise_error(Error)
     end
   end
@@ -142,13 +142,6 @@ describe IndentedIO::IndentedIO do
       out.indent.print "Beautiful\n"
       out.print "World"
       expect(res).to eq("  HelloBeautiful\n  World")
-    end
-  end
-
-  describe "#level" do
-    it 'returns the accumulated level' do
-      out = dev.indent(2).indent(3)
-      expect(out.level).to eq(5)
     end
   end
 
