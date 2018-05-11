@@ -1,7 +1,22 @@
 require 'indented_io/indented_io_interface'
 
-# :nodoc:
 module Kernel
+  # Like {IndentedIO::IndentedIOInterface#indent} except the underlying device is
+  # not the receiver (Kernel) but $stdout. Kernel#indent also allows a block without
+  # and argument. In that case it manipulates $stdout to print indented:
+  #
+  #   puts "Not indented
+  #   indent {
+  #     puts "Indented"
+  #     indent {
+  #       puts "Even more indented"
+  #     }
+  #   }
+  #
+  #   # Not indented
+  #   #   Indented
+  #   #     Even more indented
+  #
   def indent(levels = 1, string_ = IndentedIO.default_indent, string: string_, bol: nil, &block)
     block.nil? || block.arity <= 1 or raise IndentedIO::Error.new "Wrong number of parameters"
     obj = IndentedIO::IndentedIO.send(:new, $stdout, levels, string, bol)

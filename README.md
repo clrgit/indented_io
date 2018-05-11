@@ -20,13 +20,13 @@ indent(2, "* ").puts "Indented two levels"
 
 outputs
 
-```ruby
+```
 Not indented
   Indented one level
 * * Indented two levels
 ```
 
-#### `#indent`
+#### `Kernel#indent`, `IO#indent`, and `StringIO#indent`
 
 `#indent` without a block returns an `IndentedIO` object that acts as the
 receiver but redefine `#print`, `#printf`, `#puts`, and `#p` to print indented

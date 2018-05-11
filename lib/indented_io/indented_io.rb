@@ -8,17 +8,14 @@ module IndentedIO
   # levels rise or fall IndentedIO objects are moved on and off the stack
   #
   # Note that #new is private. The only way to create a IndentedIO object is to
-  # call #indent on a object that supports it
+  # call #indent on an object that supports it
   class IndentedIO
     include IndentedIOInterface
 
-    # :nodoc:
+    # @!visibility private 
     alias :interface_indent :indent
-    # :startdoc:
 
-    # Return a IndentedIO object
-    #
-    # See IndentedIO::IndentedIOInterface#indent for documentation
+    # (see IndentedIO::IndentedIOInterface#indent)
     def indent(levels=1, string_ = self.this_indent, string: string_, bol: nil, &block)
       interface_indent(levels, string, bol: bol, &block)
     end
@@ -69,14 +66,14 @@ module IndentedIO
       args.size == 1 ? args.first : args
     end
 
-    # :stopdoc:
-
     # Make IndentedIO behave like the underlying @device
+    # @!visibility private 
     def respond_to?(method)
       [:indent, :level, :print, :puts, :p].include?(method) || device.respond_to?(method)
     end
 
     # Make IndentedIO behave like the underlying @device
+    # @!visibility private 
     def method_missing(method, *args)
       device.send(method, *args)
     end
@@ -151,6 +148,7 @@ module IndentedIO
     end
 
   public
+    # @!visibility private 
     def dump
       $stderr.puts "#{self.class} [#{self.object_id}]"
       $stderr.puts "  device: #{device.class} [#{device.object_id}]"
