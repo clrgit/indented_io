@@ -2,6 +2,12 @@
 TODO
   o Check if IO object is writable - no good solution ?
   o better name for @this_indent ? 'string' ?
+  o Change dependency in IndentedIOInterface from #print to #write and bump
+    version to 0.8 as this is the last user-visible change to be made
+  o Reimplement core loop in C
+  o Create BaseIndentedIO to hold bol status and remove it from IndentedIO
+  o Transmogrify instances variables and protected methods in IndentedIO to 
+    avoid collision with names from the underlying device
 
   + explain bol
   + Allow a symbolic :string argument
@@ -15,5 +21,3 @@ TODO
   + Rename Device -> IndentedIO
 
   - Make Kernel.indent behave like Kernel ?
-
-  ? Create a BaseIndentedIO class ?
