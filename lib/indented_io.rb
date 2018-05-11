@@ -7,8 +7,9 @@ require 'indented_io/kernel'
 require 'indented_io/io'
 require 'indented_io/stringio'
 
-# IndentedIO module
-
+# IndentedIO module. See {IndentedIO::IndentedIO} for documentation on how to 
+# use this module
+#
 module IndentedIO
   # Returns default indentation. Two spaces is the default but it can be set by
   # #default_indent

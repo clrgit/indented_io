@@ -6,12 +6,12 @@ module Kernel
   # and argument. In that case it manipulates $stdout to print indented:
   #
   #   puts "Not indented
-  #   indent {
+  #   indent do
   #     puts "Indented"
-  #     indent {
+  #     indent do
   #       puts "Even more indented"
-  #     }
-  #   }
+  #     end
+  #   end
   #
   #   # Not indented
   #   #   Indented

@@ -8,7 +8,7 @@ module IndentedIO
   # levels rise or fall IndentedIO objects are moved on and off the stack
   #
   # Note that #new is private. The only way to create a IndentedIO object is to
-  # call #indent on an object that supports it
+  # call #indent on an object that supports it ({Kernel}, {IO}, or {StringIO})
   class IndentedIO
     include IndentedIOInterface
 

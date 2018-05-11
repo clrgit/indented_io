@@ -11,13 +11,11 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Print indented text}
   spec.description   = %q{
-                          IndentedIO extends Kernel, IO, and StringIO
-                          with an #indent method that returns an IndentedIO
-                          object. The IndentedIO object acts as the original
-                          object but redefines the output methods #print,
-                          #printf, #puts, and #p to print their output
-                          indented. Indentations are stacked so that each new
-                          indentation adds to the previous indendation
+                          IndentedIO extends Kernel, IO, and StringIO with an
+                          #indent method that redefines #print, printf, #puts,
+                          and #p to print their output indented. Indentations 
+                          are stacked so that each new indentation adds to the
+                          previous indendation
                        }
   spec.homepage      = "https://github.com/clrgit/indented_io"
   spec.license       = "MIT"

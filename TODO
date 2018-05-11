@@ -8,6 +8,7 @@ TODO
   o Create BaseIndentedIO to hold bol status and remove it from IndentedIO
   o Transmogrify instances variables and protected methods in IndentedIO to 
     avoid collision with names from the underlying device
+  o Explain name collision issues in the docs
 
   + explain bol
   + Allow a symbolic :string argument

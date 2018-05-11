@@ -1,12 +1,10 @@
 # IndentedIO
 
-Print indented text
-
 `IndentedIO` extends `Kernel`, `IO`, and `StringIO` with an `#indent` method
 that returns an `IndentedIO` object. The `IndentedIO` object acts as the
-original object but redefines the output methods `#print`, `#printf`, `#puts`,
-and `#p` to print their output indented.  Indentations are stacked so that each
-new indentation adds to the previous indendation
+original object but redefines `#print`, `#printf`, `#puts`, and `#p` to print
+their output indented. Indentations are stacked so that each new indentation
+adds to the previous indendation
 
 ## Usage
 
@@ -54,10 +52,10 @@ instead:
 
 ```ruby
 $stdout.puts "Not indented"
-$stdout.indent(2, "> ") { |f|
+$stdout.indent(2, "> ") do |f|
   f.indent(string: "* ").puts "Indented three levels"
   f.indent(-1).puts "Indented one level"
-}
+end
 
 # Not indented
 # > > * Indented three levels
@@ -74,13 +72,13 @@ indented within that block:
 
 ```ruby
 puts "Not indented"
-indent {
+indent do
   puts "Indented one level"
-  indent {
+  indent do
     puts "Indented two levels"
-  }
+  end
   puts "Indented one level"
-}
+end
 puts "Not indented"
 
 # Not indented
@@ -140,7 +138,7 @@ to get a different indentation for a part of the program
 
 In case of errors an `IndentedIO::Error` exception is raised
 
-## Add support for other classes
+## Adding support for other classes
 
 You can add support for your own IO objects by including
 `IndentedIO::IndentedIOInterface` in your class.  All that is required is that
@@ -155,7 +153,11 @@ class MyIO
 end
 
 my_io = MyIO.new
+my_io.puts "Not indented"
 my_io.indent.puts "It works!"
+
+# Not indented
+#   It works!
 ```
 
 ## Implementation & performance

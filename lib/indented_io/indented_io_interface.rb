@@ -1,6 +1,6 @@
 module IndentedIO
-  # IndentedIO interface that provides the #indent method. Used by IO,
-  # StringIO, and IndentedIO. It can be included in any class that define a
+  # IndentedIO interface that provides the #indent method. It is used by IO,
+  # StringIO, and IndentedIO but can be included in any class that define a
   # #print method like this:
   #
   #   require 'indented_io'
