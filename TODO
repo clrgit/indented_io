@@ -9,6 +9,10 @@ TODO
   o Transmogrify instances variables and protected methods in IndentedIO to 
     avoid collision with names from the underlying device
   o Explain name collision issues in the docs
+  o Oops. #print reimplemention doesn't do this:
+     If the output field separator ($,) is not nil, it is inserted between
+     objects. If the output record separator ($\) is not nil, it is appended to
+     the output 
 
   + explain bol
   + Allow a symbolic :string argument
