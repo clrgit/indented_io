@@ -11,9 +11,9 @@ adds to the previous indendation
 ```ruby
 require 'indented_io'
 
-puts "Not indented"
-indent { puts "Indented one level" }
-indent(2, "* ").puts "Indented two levels"
+puts 'Not indented'
+indent { puts 'Indented one level' }
+indent(2, '* ').puts 'Indented two levels'
 ```
 
 outputs
@@ -32,9 +32,9 @@ If given a block, the block will be called with the IndentedIO object as
 argument:
 
 ```ruby
-$stdout.puts "Not indented"
-$stdout.indent.puts "Indented"
-$stdout.indent { |f| f.puts "Indented" }
+$stdout.puts 'Not indented'
+$stdout.indent.puts 'Indented'
+$stdout.indent { |f| f.puts 'Indented' }
 
 # Not indented
 #   Indented
@@ -51,10 +51,10 @@ symbolic argument `:string`. If level is negative, the text will be outdented
 instead:
 
 ```ruby
-$stdout.puts "Not indented"
-$stdout.indent(2, "> ") do |f|
-  f.indent(string: "* ").puts "Indented three levels"
-  f.indent(-1).puts "Indented one level"
+$stdout.puts 'Not indented'
+$stdout.indent(2, '> ') do |f|
+  f.indent(string: '* ').puts 'Indented three levels'
+  f.indent(-1).puts 'Indented one level'
 end
 
 # Not indented
@@ -71,15 +71,15 @@ that `Kernel#print`, `Kernel#printf`, `Kernel#puts`, and `Kernel#p` will output
 indented within that block:
 
 ```ruby
-puts "Not indented"
+puts 'Not indented'
 indent do
-  puts "Indented one level"
+  puts 'Indented one level'
   indent do
-    puts "Indented two levels"
+    puts 'Indented two levels'
   end
-  puts "Indented one level"
+  puts 'Indented one level'
 end
-puts "Not indented"
+puts 'Not indented'
 
 # Not indented
 #   Indented one level
@@ -95,8 +95,8 @@ def legacy(phrase)
   puts phrase
 end
 
-legacy("Not indented")
-indent { legacy("Indented" }
+legacy('Not indented')
+indent { legacy('Indented' }
 
 # Not indented
 #   Indented
@@ -111,8 +111,8 @@ that specify if the output device is at the beginning of a line and that printin
 should start with an indentation string:
 
 ```ruby
-indent(1, bol: true).puts "Indented"
-indent(1, bol: false).puts "Not indented\nIndented"
+indent(1, bol: true).puts 'Indented'
+indent(1, bol: false).puts 'Not indented\nIndented'
 
 #   Indented
 # Not indented
@@ -124,7 +124,7 @@ indent(1, bol: false).puts "Not indented\nIndented"
 The default indentation string is defined in `IndentedIO`:
 
 ```ruby
-IndentedIO.default_indent = ">> "
+IndentedIO.default_indent = '>> '
 indent.puts "Indented by #{IndentedIO.default_indent.inspect}"
 
 # >> Indented by ">> "
@@ -153,8 +153,8 @@ class MyIO
 end
 
 my_io = MyIO.new
-my_io.puts "Not indented"
-my_io.indent.puts "It works!"
+my_io.puts 'Not indented'
+my_io.indent.puts 'It works!'
 
 # Not indented
 #   It works!
