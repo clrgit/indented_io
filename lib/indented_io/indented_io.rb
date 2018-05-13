@@ -152,18 +152,5 @@ module IndentedIO
         self.bol = (bol.nil? ? true : bol)
       end
     end
-
-  public
-    # @!visibility private 
-    def dump
-      $stderr.puts "#{self.class} [#{self.object_id}]"
-      $stderr.puts "  device: #{device.class} [#{device.object_id}]"
-      $stderr.puts "  base  : #{base.class} [#{base.object_id}]"
-      $stderr.puts "  parent: #{parent.class} [#{parent.object_id}]"
-      $stderr.puts "  levels: #{levels}"
-      $stderr.puts "  this_indent: #{this_indent.inspect}"
-      $stderr.puts "  combined_indent: #{combined_indent.inspect}"
-      $stderr.puts "  bol: #{bol}"
-    end
   end
 end
