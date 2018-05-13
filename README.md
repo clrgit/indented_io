@@ -142,14 +142,14 @@ In case of errors an `IndentedIO::Error` exception is raised
 
 You can add support for your own IO objects by including
 `IndentedIO::IndentedIOInterface` in your class.  All that is required is that
-the class define a `#print` method with the same semantics as the system
-`#print`
+the class define a `#write` method with the same semantics as `IO#write`
+(convert arguments to strings and then write them)
 
 ```ruby
 require 'indented_io'
 class MyIO
   include IndentedIO::IndentedIOInterface
-  def print(*args) ... end
+  def writte(*args) ... end
 end
 
 my_io = MyIO.new
@@ -174,7 +174,7 @@ check performance). It would be much faster if the inner loop was implemented
 in C. However, we're talking micro-seconds here: Printing without using
 IndentedIO range from around 0.25ms to 1ms while using IndentedIO slows it down
 to between 4 and 12 microseconds, so IndentedIO won't cause a noticeable slow
-down of your application
+down of your application unless you do a lot of output
 
 ## Installation
 

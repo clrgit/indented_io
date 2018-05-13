@@ -53,8 +53,8 @@ shared_examples "indent method" do |klass=nil|
     end
   else
     it 'uses IndentedIO.default_indent as default' do
-      recv.indent(1).print ""
-      expect(result).to eq(IndentedIO.default_indent)
+      recv.indent(1).print "*"
+      expect(result).to eq(IndentedIO.default_indent + "*")
     end
   end
 

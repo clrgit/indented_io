@@ -1,23 +1,56 @@
-shared_examples "output methods" do |method| # method is :p, :puts, or :print
+shared_examples "output methods" do |method| # method is :write, :print, :puts, or :p
   # Generalize output format
   quote = (method == :p ? '"' : '')
-  endl = (method == :print ? "" : "\n")
+  endl = (method == :write || method == :print ? "" : "\n")
+
+  let(:device) { StringIO.new }
+  let(:output) { device.indent }
+  def result() r = device.string; device.string = ""; r end
 
   it 'prints indented' do
-    dev = StringIO.new
-    dev.indent(1, " ").send method, "Hello"
-    expect(dev.string).to eq(" #{quote}Hello#{quote}#{endl}")
+    device.indent(1, " ").send method, "Hello"
+    expect(result).to eq(" #{quote}Hello#{quote}#{endl}")
 
-    dev = StringIO.new
-    dev.indent(2, "-").send method, "Hello"
-    expect(dev.string).to eq("--#{quote}Hello#{quote}#{endl}")
+    device.indent(2, "-").send method, "Hello"
+    expect(result).to eq("--#{quote}Hello#{quote}#{endl}")
   end
 
-  context 'when called with an empty string' do
-    it "outputs the indendation#{method == :print ? "" : " followed by a newline"}" do
-      dev = StringIO.new
-      dev.indent(1, " ").send method, ""
-      expect(dev.string).to eq(" #{quote}#{quote}#{endl}")
+  if method != :p
+    context 'when writing empty lines' do
+      it 'doesn\'t output the indentation' do
+        output.send(method, "\n\n")
+        expect(result).to eq("\n\n#{endl}")
+      end
+    end
+
+    context 'when called with an empty string' do
+      if method == :puts
+        it 'outputs an empty line' do
+          output.send(method, "")
+          expect(result).to eq("\n")
+        end
+      else
+        it 'does nothing' do
+          output.send(method, "")
+          expect(result).to eq("")
+        end
+      end
+    end
+  end
+
+  context "when called with no arguments" do
+    if method == :puts
+      it 'outputs an empty line' do
+        output.puts 'Hello'
+        output.puts
+        output.puts 'World'
+        expect(result).to eq("  Hello\n\n  World\n")
+      end
+    else
+      it 'doesn\'t output anything' do
+        output.send(method)
+        expect(result).to eq('')
+      end
     end
   end
 
@@ -25,20 +58,55 @@ shared_examples "output methods" do |method| # method is :p, :puts, or :print
     context "when called with one argument" do
       it "returns that argument" do
         obj = "Object"
-        expect(out.p(obj)).to eq(obj)
+        expect(output.p(obj)).to eq(obj)
       end
     end
     context "when called with more than one argument" do
       it 'returns an array of the arguments' do
         obj1 = "Object 1"
         obj2 = "Object 2"
-        expect(out.p(obj1, obj2)).to eq([obj1, obj2])
+        expect(output.p(obj1, obj2)).to eq([obj1, obj2])
       end
+    end
+  elsif method == :write
+    it 'returns the number of bytes written' do
+      n = output.write('Hello')
+      expect(n).to eq(7)
     end
   else
     it 'returns nil' do
-      expect(out.send method, "Hello\n").to eq(nil)
+      expect(output.send method, "Hello\n").to eq(nil)
+    end
+  end
+
+  if method == :print
+    context 'when $, is not nil' do
+      it 'separates the arguments using $,' do
+        $, = nil
+        device.indent.send(method, 'Hello', 'World')
+        expect(result).to eq('  HelloWorld')
+        begin
+          $, = ' '
+          device.indent.send(method, 'Hello', 'World')
+          expect(result).to eq('  Hello World')
+        ensure
+          $, = nil
+        end
+      end
+    end
+    context 'when $\ is not nil' do
+      it 'suffixes the output with $\\' do
+        $\ = nil
+        device.indent.send(method, 'Hello')
+        expect(result).to eq('  Hello')
+        begin
+          $\ = '!'
+          device.indent.send(method, 'Hello')
+          expect(result).to eq('  Hello!')
+        ensure
+          $\ = nil
+        end
+      end
     end
   end
 end
-

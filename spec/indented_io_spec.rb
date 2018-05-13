@@ -3,7 +3,7 @@ require 'support/output_methods'
 
 describe IndentedIO::IndentedIO do
   let(:dev) { StringIO.new } # Underlying IO device
-  let(:out) { dev.indent(1, "  ") } # Indented 1 level - used by shared examples
+  let(:out) { dev.indent(1, "  ") } # Indented 1 level
   def res() r = dev.string; dev.string = ""; r end # Read and reset dev's result
 
   it 'forwards method to the underlying device' do
@@ -145,12 +145,16 @@ describe IndentedIO::IndentedIO do
     end
   end
 
+  describe "#write" do
+    include_examples "output methods", :write
+  end
+
   describe "#print" do
     include_examples "output methods", :print
   end
 
   describe "#printf" do
-    it 'interpolates its arguments and forwards to #print' do
+    it 'interpolates its arguments and forwards to #write' do
       dev.indent.printf "%s", "Hello"
       expect(res).to eq("  Hello")
     end

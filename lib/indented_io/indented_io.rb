@@ -20,48 +20,54 @@ module IndentedIO
       interface_indent(levels, string, bol: bol, &block)
     end
 
-    # Indent and print args to the underlying device. #print has the same semantic
-    # as Kernel#print
-    def print(*args)
-      if bol
-        @device.print @combined_indent
-        self.bol = false
-      end
+    # Indent and print args to the underlying device. #write has the same semantic
+    # as IO#write
+    def write(*args)
+      n_bytes = 0
       args.join.each_char { |c|
         if c == "\n"
           self.bol = true
         elsif bol
-          @device.print @combined_indent
+          n_bytes += @device.write(@combined_indent)
           self.bol = false
         end
-        @device.print c
+        n_bytes += @device.write(c)
       }
+      n_bytes
+    end
+
+    # Indent and print args to the underlying device. #print has the same semantic
+    # as Kernel#print
+    def print(*args)
+      return nil if args.empty?
+      write(args.join($, || ''))
+      write($\) if $\
       nil
     end
 
     # Indent and print args to the underlying device. #printf has the same semantic
     # as Kernel#printf
     def printf(format, *args)
-      print format % args
+      write format % args
     end
 
     # Indent and print args to the underlying device. #puts has the same semantic
     # as Kernel#puts
     def puts(*args)
-      args.each { |arg| print(arg, "\n") }
+      write args.join("\n"), "\n"
       nil
     end
 
     # Indent and print args to the underlying device. #p has the same semantic
     # as Kernel#p. Please note that #p is usually not defined on other classes
-    # then Kernel but can be used on any IndentedIO object
+    # than Kernel but can be used on any IndentedIO object
     def p(*args)
       if bol
-        args.each { |arg| print(arg.inspect, "\n") }
+        args.each { |arg| write(arg.inspect, "\n") }
       else
-        @device.print args.first.inspect, "\n"
+        @device.write(args.first.inspect, "\n")
         bol = true
-        args[1..-1].each { |arg| print(arg.inspect, "\n") }
+        args[1..-1].each { |arg| write(arg.inspect, "\n") }
       end
       args.size == 1 ? args.first : args
     end

@@ -56,7 +56,7 @@ dynamic_wo_indent = timeit {
 }
 
 dynamic_w_indent = nil
-indent("  ") {
+indent(:string => "  ") {
   dynamic_w_indent = timeit { puts "Indented" }
 }
 

@@ -1,12 +1,12 @@
 module IndentedIO
   # IndentedIO interface that provides the #indent method. It is used by IO,
   # StringIO, and IndentedIO but can be included in any class that define a
-  # #print method like this:
+  # #write method like this:
   #
   #   require 'indented_io'
   #   class MyIO
   #     include IndentedIO::IndentedIOInterface
-  #     def print(*args) ... end
+  #     def write(*args) ... end
   #   end
   #
   #   my_io = MyIO.new

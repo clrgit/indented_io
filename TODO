@@ -2,18 +2,20 @@
 TODO
   o Check if IO object is writable - no good solution ?
   o better name for @this_indent ? 'string' ?
-  o Change dependency in IndentedIOInterface from #print to #write and bump
-    version to 0.8 as this is the last user-visible change to be made
   o Reimplement core loop in C
   o Create BaseIndentedIO to hold bol status and remove it from IndentedIO
   o Transmogrify instances variables and protected methods in IndentedIO to 
     avoid collision with names from the underlying device
   o Explain name collision issues in the docs
-  o Oops. #print reimplemention doesn't do this:
+  o Remove IndentedIO#dump
+
+  + Change dependency in IndentedIOInterface from #print to #write and bump
+    version to 0.8 as this is the last user-visible change to be made
+  + Oops. #print reimplemention doesn't do this:
      If the output field separator ($,) is not nil, it is inserted between
      objects. If the output record separator ($\) is not nil, it is appended to
      the output 
-
+  + Tests for #write
   + explain bol
   + Allow a symbolic :string argument
   + #printf !
