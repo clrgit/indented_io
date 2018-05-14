@@ -1,4 +1,4 @@
 module IndentedIO
   # Version number
-  VERSION = '0.8.0'
+  VERSION = '8.1.0'
 end
