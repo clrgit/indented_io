@@ -7,14 +7,23 @@ RUNS = 1_000_000
 saved_stdout = $stdout
 $stdout = File.open("/dev/null", "w")
 
-def timeit(&block)
+$base = 0.0
+
+def timeit_impl(&block)
   t0 = Time.now
   RUNS.times {
     yield
   }
   t1 = Time.now
-  (1000 * (t1 - t0)).round(0)
+  t1 - t0 - $base
 end
+
+$base = timeit_impl {}
+
+def timeit(&block)
+  (1000 * timeit_impl(&block)).round(0)
+end
+
 
 def report(title, wo_indent, w_indent)
   times = (w_indent / wo_indent).round(1)
