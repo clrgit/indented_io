@@ -168,13 +168,13 @@ with a block without parameters manipulates `$stdout`, replacing it with an
 `IndentedIO` object for the duration of the block
 
 The implementation carries no overhead if it is not used but the core
-indentation mechanism processes characters one-by-one which is about 10-15
-times slower than a handwritten implementation (scripts/perf.rb is a script to
-check performance). It would be much faster if the inner loop was implemented
-in C. However, we're talking micro-seconds here: Printing without using
-IndentedIO range from around 0.25ms to 1ms while using IndentedIO slows it down
-to between 4 and 12 microseconds, so IndentedIO won't cause a noticeable slow
-down of your application unless you do a lot of output
+indentation mechanism processes characters one-by-one which is about 7-8 times
+slower than a handwritten implementation (scripts/perf.rb is a script to check
+performance). It would be much faster if the inner loop was implemented in C.
+However, we're talking micro-seconds here: Printing without using IndentedIO
+range from around 0.25us to 1us while using IndentedIO slows it down to between
+2us and 8us, so IndentedIO won't cause a noticeable slow down of your
+application unless you do a lot of output
 
 ## Installation
 

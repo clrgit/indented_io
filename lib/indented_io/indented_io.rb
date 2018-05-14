@@ -23,17 +23,11 @@ module IndentedIO
     # Indent and print args to the underlying device. #write has the same semantic
     # as IO#write
     def write(*args)
-      n_bytes = 0
-      args.join.each_char { |c|
-        if c == "\n"
-          self.bol = true
-        elsif bol
-          n_bytes += @device.write(@combined_indent)
-          self.bol = false
-        end
-        n_bytes += @device.write(c)
-      }
-      n_bytes
+      str = args.join
+      return if str.empty?
+      s = (bol && str[0] != "\n" ? @combined_indent : "") + str.gsub(/\n([^\n])/m, "\n#{@combined_indent}\\1")
+      self.bol = (s[-1] == "\n")
+      @device.write(s)
     end
 
     # Indent and print args to the underlying device. #print has the same semantic
