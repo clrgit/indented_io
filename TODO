@@ -7,8 +7,8 @@ TODO
   o Transmogrify instances variables and protected methods in IndentedIO to 
     avoid collision with names from the underlying device
   o Explain name collision issues in the docs
-  o Remove IndentedIO#dump
 
+  + Remove IndentedIO#dump
   + Change dependency in IndentedIOInterface from #print to #write and bump
     version to 0.8 as this is the last user-visible change to be made
   + Oops. #print reimplemention doesn't do this:
