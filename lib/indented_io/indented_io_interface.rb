@@ -4,6 +4,7 @@ module IndentedIO
   # #write method like this:
   #
   #   require 'indented_io'
+  #
   #   class MyIO
   #     include IndentedIO::IndentedIOInterface
   #     def write(*args) ... end
@@ -18,7 +19,7 @@ module IndentedIO
   #
   module IndentedIOInterface
     # Returns a IndentedIO object that can be used for printing. The IO object
-    # will pass-through all method to the underlying device except #print,
+    # will pass-through all methods to the underlying device except #print,
     # #printf, #puts, and #p
     #
     # +level+ is the number of leves to indent and +string+ is the string used

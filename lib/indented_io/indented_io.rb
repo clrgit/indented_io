@@ -53,8 +53,8 @@ module IndentedIO
     end
 
     # Indent and print args to the underlying device. #p has the same semantic
-    # as Kernel#p. Please note that #p is usually not defined on other classes
-    # than Kernel but can be used on any IndentedIO object
+    # as Kernel#p. Please note that #p is only defined on Kernel in the Ruby core
+    # library but can be used on any IndentedIO object
     def p(*args)
       if bol
         args.each { |arg| write(arg.inspect, "\n") }
@@ -69,7 +69,7 @@ module IndentedIO
     # Make IndentedIO behave like the underlying @device
     # @!visibility private 
     def respond_to?(method)
-      [:indent, :level, :print, :puts, :p].include?(method) || device.respond_to?(method)
+      [:indent, :level, :print, :printf, :puts, :p].include?(method) || device.respond_to?(method)
     end
 
     # Make IndentedIO behave like the underlying @device
@@ -85,8 +85,8 @@ module IndentedIO
     attr_reader :device
 
     # First IndentedIO object on the stack. Equal to self if self is the first
-    # indentation object. #base is used to keep track of #bol for the whole
-    # stack of IndentedIO objects
+    # indentation object. The #base object is used to keep track of #bol for
+    # the whole stack of IndentedIO objects
     attr_reader :base
 
     # Parent IndentedIO or IO object

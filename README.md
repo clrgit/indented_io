@@ -149,7 +149,7 @@ the class define a `#write` method with the same semantics as `IO#write`
 require 'indented_io'
 class MyIO
   include IndentedIO::IndentedIOInterface
-  def writte(*args) ... end
+  def write(*args) ... end
 end
 
 my_io = MyIO.new

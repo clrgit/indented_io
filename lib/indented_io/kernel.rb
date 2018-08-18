@@ -3,7 +3,7 @@ require 'indented_io/indented_io_interface'
 module Kernel
   # Like {IndentedIO::IndentedIOInterface#indent} except the underlying device is
   # not the receiver (Kernel) but $stdout. Kernel#indent also allows a block without
-  # and argument. In that case it manipulates $stdout to print indented:
+  # an argument. In that case it manipulates $stdout to print indented:
   #
   #   puts "Not indented
   #   indent do
