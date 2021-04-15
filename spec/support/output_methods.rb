@@ -78,35 +78,4 @@ shared_examples "output methods" do |method| # method is :write, :print, :puts, 
       expect(output.send method, "Hello\n").to eq(nil)
     end
   end
-
-  if method == :print
-    context 'when $, is not nil' do
-      it 'separates the arguments using $,' do
-        $, = nil
-        device.indent.send(method, 'Hello', 'World')
-        expect(result).to eq('  HelloWorld')
-        begin
-          $, = ' '
-          device.indent.send(method, 'Hello', 'World')
-          expect(result).to eq('  Hello World')
-        ensure
-          $, = nil
-        end
-      end
-    end
-    context 'when $\ is not nil' do
-      it 'suffixes the output with $\\' do
-        $\ = nil
-        device.indent.send(method, 'Hello')
-        expect(result).to eq('  Hello')
-        begin
-          $\ = '!'
-          device.indent.send(method, 'Hello')
-          expect(result).to eq('  Hello!')
-        ensure
-          $\ = nil
-        end
-      end
-    end
-  end
 end

@@ -68,7 +68,7 @@ module IndentedIO
 
     # Make IndentedIO behave like the underlying @device
     # @!visibility private 
-    def respond_to?(method)
+    def respond_to?(method, include_all = false)
       [:indent, :level, :print, :printf, :puts, :p].include?(method) || device.respond_to?(method)
     end
 
