@@ -6,6 +6,7 @@ require 'indented_io/indented_io_interface'
 require 'indented_io/kernel'
 require 'indented_io/io'
 require 'indented_io/stringio'
+require 'indented_io/tempfile'
 
 # IndentedIO module. See {IndentedIO::IndentedIO} for documentation on how to 
 # use this module

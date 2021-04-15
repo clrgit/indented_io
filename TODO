@@ -1,5 +1,7 @@
 
 TODO
+  o Find a solution for the inclusion of StringIO and Tempfile (the last is 
+    required by ruby 2.7 - see also note in lib/indented_io/tempfile.rb
   o Check if IO object is writable - no good solution ?
   o better name for @this_indent ? 'string' ?
   o Reimplement core loop in C
