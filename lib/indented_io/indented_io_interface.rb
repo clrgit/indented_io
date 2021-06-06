@@ -33,7 +33,7 @@ module IndentedIO
     # If +level+ is negative, #indent will outdent text instead
     #
     def indent(levels = 1, string_ = ::IndentedIO.default_indent, string: string_, bol: nil, &block)
-      block.nil? || block.arity == 1 or raise ::IndentedIO::Error.new "Wrong number of parameters"
+      block.nil? || block.arity == 1 or raise ::IndentedIO::Error.new "Wrong number of block parameters"
       obj = ::IndentedIO::IndentedIO.send(:new, self, levels, string, bol)
       block_given? ? yield(obj) : obj
     end
