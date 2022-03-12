@@ -1,6 +1,4 @@
 
-include IndentedIO
-
 describe IndentedIO do
   it 'has a version number' do
     expect(::IndentedIO::VERSION).not_to be_nil

@@ -1,12 +1,14 @@
 
 TODO
+  o Make IndentedIOInterface#indent handle multiple levels. This makes
+    IndentedIO::IndentedIO much simpler
   o Fix that #indent is defined on _all_ objects!
   o Find a solution for the inclusion of StringIO and Tempfile (the last is 
     required by ruby 2.7 - see also note in lib/indented_io/tempfile.rb
   o Check if IO object is writable - no good solution ?
   o better name for @this_indent ? 'string' ?
   o Reimplement core loop in C
-  o Create BaseIndentedIO to hold bol status and remove it from IndentedIO
+  o Create InitialIndentedIO to hold bol status and remove it from IndentedIO
   o Transmogrify instances variables and protected methods in IndentedIO to 
     avoid collision with names from the underlying device
   o Explain name collision issues in the docs

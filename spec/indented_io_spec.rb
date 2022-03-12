@@ -3,7 +3,7 @@ require 'support/output_methods'
 
 describe IndentedIO::IndentedIO do
   let(:dev) { StringIO.new } # Underlying IO device
-  let(:out) { dev.indent(1, "  ") } # Indented 1 level
+  let(:out) { dev.indent(1, "  ") } # Indented 1 depth
   def res() r = dev.string; dev.string = ""; r end # Read and reset dev's result
 
   it 'forwards method to the underlying device' do
@@ -25,8 +25,8 @@ describe IndentedIO::IndentedIO do
       dev.indent(1, ">>").print "Hello"
       expect(res).to eq(">>Hello")
     end
-    it "doesn't allow negative levels" do
-      expect { dev.indent(-1, "") }.to raise_error(Error)
+    it "doesn't allow negative depths" do
+      expect { dev.indent(-1, "") }.to raise_error(::IndentedIO::Error)
     end
   end
 
@@ -38,15 +38,15 @@ describe IndentedIO::IndentedIO do
     end
   end
 
-  context 'when initialized with level >= 0' do
+  context 'when initialized with depth >= 0' do
     it 'prepends lines with this number of concatenated indentations strings' do
       dev.indent(2, "  ").print "*"
       expect(res).to eq("    *")
     end
   end
 
-  context 'when initialized with level < 0' do
-    it 'outdents this number of levels' do
+  context 'when initialized with depth < 0' do
+    it 'outdents this number of depths' do
       out = dev.indent(2, '>')
       out.puts "Hello"
       out.indent(-1).print 'World'
@@ -58,6 +58,12 @@ describe IndentedIO::IndentedIO do
       expect(res).to eq(">>Hello\nWorld")
     end
 
+#   it 'goes wrong' do
+#     out = dev.indent(2, ' ')
+#     out = out.indent(-1, '*').print "+"
+#     p res
+#   end
+  
     it 'uses sibling indent for defaults' do
       out = dev.indent(1, '>')
       out.indent(-1).indent.print "Hello"
@@ -65,12 +71,12 @@ describe IndentedIO::IndentedIO do
     end
 
     it 'raises if called on a device' do
-      expect { $stdout.indent(-1) }.to raise_error(Error)
+      expect { $stdout.indent(-1) }.to raise_error(::IndentedIO::Error)
     end
 
-    it 'raises if called with self.level - levels < 0' do
+    it 'raises if called with self.depth - depths < 0' do
       out = dev.indent
-      expect { out.indent(-2) }.to raise_error(Error)
+      expect { out.indent(-2) }.to raise_error(::IndentedIO::Error)
     end
   end
 
@@ -136,7 +142,7 @@ describe IndentedIO::IndentedIO do
       out.indent(-1).print "World"
       expect(res).to eq("  HelloWorld")
 
-      # Going back to previous level
+      # Going back to previous depth
       out = dev.indent
       out.print "Hello"
       out.indent.print "Beautiful\n"

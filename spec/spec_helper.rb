@@ -36,8 +36,6 @@ RSpec::Core::Formatters::DocumentationFormatter.prepend FormatterOverrides
 # Project modifications
 #
 
-include IndentedIO
-
 # Open access to IndentedIO::IndentedIO.new
 module IndentedIO
   class IndentedIO

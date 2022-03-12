@@ -34,8 +34,20 @@ module IndentedIO
     #
     def indent(levels = 1, string_ = ::IndentedIO.default_indent, string: string_, bol: nil, &block)
       block.nil? || block.arity == 1 or raise ::IndentedIO::Error.new "Wrong number of block parameters"
-      obj = ::IndentedIO::IndentedIO.send(:new, self, levels, string, bol)
-      block_given? ? yield(obj) : obj
+      @indented_io_object = ::IndentedIO::IndentedIO.send(:new, self, levels, string, bol)
+      block_given? ? yield(@indented_io_object) : @indented_io_object
     end
+
+    # :call-seq:
+    #   indent(levels, string = ::IndentedIO.default:_indent, bol: nil, &block)
+    #   indent(string = ::IndentedIO.default:_indent, bol: nil, &block)
+
+    # Return the accumulated number of indentation levels. An unindented device
+    # has depth equal to 0
+    def depth() 0 end
+
+    # Return current tabulator position. This is the same as the combined
+    # length of the indentations. An unindented device has depth equal to 0
+    def tab() 0 end
   end
 end
