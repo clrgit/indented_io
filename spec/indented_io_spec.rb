@@ -58,10 +58,10 @@ describe IndentedIO::IndentedIO do
       expect(res).to eq(">>Hello\nWorld")
     end
 
-#   it 'goes wrong' do
+    it 'goes wrong' #do
 #     out = dev.indent(2, ' ')
-#     out = out.indent(-1, '*').print "+"
-#     p res
+#     out = out.indent(-1, '*').print "Hello"
+#     expect(res).to eq " *Hello"
 #   end
   
     it 'uses sibling indent for defaults' do

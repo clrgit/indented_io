@@ -1,7 +1,8 @@
 
 TODO
-  o Make IndentedIOInterface#indent handle multiple levels. This makes
-    IndentedIO::IndentedIO much simpler
+  o Fix "goes wrong" in spec/indented_io_spec.rb by making
+    IndentedIOInterface#indent create a IndentedIO object for each level. This
+    may require blocks to pop-off multiple levels
   o Fix that #indent is defined on _all_ objects!
   o Find a solution for the inclusion of StringIO and Tempfile (the last is 
     required by ruby 2.7 - see also note in lib/indented_io/tempfile.rb
