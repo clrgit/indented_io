@@ -13,7 +13,7 @@ require 'indented_io/tempfile'
 #
 module IndentedIO
   # Returns default indentation. Two spaces is the default but it can be set by
-  # #default_indent
+  # #default_indent=
   def self.default_indent() @DEFAULT_INDENT end
 
   # Sets default indentation
