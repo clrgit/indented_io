@@ -1,5 +1,17 @@
 
 TODO
+  o Make the folowing wotk
+        # Shorthand for
+        #   puts "Header"
+        #   indent { puts content }
+        #
+        puts "Header", indent, content
+
+        # Shorthand for
+        #   puts "Header"
+        #   indent { recurse }
+        puts "Header", indent { recurse }
+
   o Fix "goes wrong" in spec/indented_io_spec.rb by making
     IndentedIOInterface#indent create a IndentedIO object for each level. This
     may require blocks to pop-off multiple levels
