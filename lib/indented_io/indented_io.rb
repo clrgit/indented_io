@@ -54,8 +54,10 @@ module IndentedIO
     end
 
     # Indent and print args to the underlying device. #p has the same semantic
-    # as Kernel#p. Please note that even though #p is only defined on Kernel
-    # but can be used on any IndentedIO object so you can say '$stderr.p value'
+    # as Kernel#p. Please note that even though #p is only defined on Kernel it
+    # can also be used on any IndentedIO object so you can say '$stderr.p
+    # value'. This also deviates from the standard ruby $stderr object that
+    # doesn't have a #p method defined
     def p(*args)
       if bol
         args.each { |arg| write(arg.inspect, "\n") }
