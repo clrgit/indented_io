@@ -13,7 +13,7 @@ module IndentedIO
   class IndentedIO
     include IndentedIOInterface
 
-    # @!visibility private 
+    # @!visibility private
     alias :interface_indent :indent
 
     # (see IndentedIO::IndentedIOInterface#indent)
@@ -72,13 +72,13 @@ module IndentedIO
     # Make IndentedIO behave like the underlying @device by only searching for
     # methods in the device
     #
-    # @!visibility private 
+    # @!visibility private
     def respond_to?(method, include_all = false)
       [:indent, :depth, :tab, :p].include?(method) || device.respond_to?(method, include_all)
     end
 
     # Make IndentedIO behave like the underlying @device
-    # @!visibility private 
+    # @!visibility private
     def method_missing(method, *args)
       device.send(method, *args)
     end
