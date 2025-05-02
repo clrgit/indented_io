@@ -28,7 +28,7 @@ module IndentedIO
     # {::IndentedIO.default_indent} if this is the first level. +:bol+ control the
     # beginning-of-line status: If true, #indent will begin writing with an
     # indentation string as if it was at the beginning of the line. If false,
-    # it will only indent after the next newline. Default is true
+    # it will only indent after the first newline. Default is true
     #
     # If +level+ is negative, #indent will outdent text instead
     #
