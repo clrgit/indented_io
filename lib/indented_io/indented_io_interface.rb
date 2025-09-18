@@ -22,7 +22,7 @@ module IndentedIO
     # will pass-through all methods to the underlying device except #print,
     # #printf, #puts, and #p
     #
-    # +level+ is the number of leves to indent and +string+ is the string used
+    # +level+ is the number of levels to indent and +string+ is the string used
     # for indentation. The indentation string can also be given as the keyword
     # parameter +:string+. Default is the indent string of the outer level or
     # {::IndentedIO.default_indent} if this is the first level. +:bol+ control the

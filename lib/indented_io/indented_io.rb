@@ -21,6 +21,10 @@ module IndentedIO
       interface_indent(depth, string, bol: bol, &block)
     end
 
+    def undent
+      @parent
+    end
+
     # Indent and print args to the underlying device. #write has the same semantic
     # as IO#write
     def write(*args)
