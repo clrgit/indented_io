@@ -13,12 +13,16 @@ module IndentedIO
   class IndentedIO
     include IndentedIOInterface
 
-    # @!visibility private 
+    # @!visibility private
     alias :interface_indent :indent
 
     # (see IndentedIO::IndentedIOInterface#indent)
     def indent(depth=1, string_ = self.this_indent, string: string_, bol: nil, &block)
       interface_indent(depth, string, bol: bol, &block)
+    end
+
+    def undent
+      @parent
     end
 
     # Indent and print args to the underlying device. #write has the same semantic
@@ -54,8 +58,10 @@ module IndentedIO
     end
 
     # Indent and print args to the underlying device. #p has the same semantic
-    # as Kernel#p. Please note that even though #p is only defined on Kernel
-    # but can be used on any IndentedIO object so you can say '$stderr.p value'
+    # as Kernel#p. Please note that even though #p is only defined on Kernel it
+    # can also be used on any IndentedIO object so you can say '$stderr.p
+    # value'. This also deviates from the standard ruby $stderr object that
+    # doesn't have a #p method defined
     def p(*args)
       if bol
         args.each { |arg| write(arg.inspect, "\n") }
@@ -70,13 +76,13 @@ module IndentedIO
     # Make IndentedIO behave like the underlying @device by only searching for
     # methods in the device
     #
-    # @!visibility private 
+    # @!visibility private
     def respond_to?(method, include_all = false)
       [:indent, :depth, :tab, :p].include?(method) || device.respond_to?(method, include_all)
     end
 
     # Make IndentedIO behave like the underlying @device
-    # @!visibility private 
+    # @!visibility private
     def method_missing(method, *args)
       device.send(method, *args)
     end

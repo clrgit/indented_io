@@ -1,6 +1,8 @@
 require 'indented_io/indented_io_interface'
 
 module Kernel
+  @@INDENT_STACK = []
+
   # Like {IndentedIO::IndentedIOInterface#indent} except the underlying device is
   # not the receiver (Kernel) but $stdout. Kernel#indent also allows a block without
   # an argument. In that case it manipulates $stdout to print indented:
@@ -17,6 +19,9 @@ module Kernel
   #   #   Indented
   #   #     Even more indented
   #
+  # It called without a block, it indents $stdout. It should then be matched
+  # with a corresponding #undent
+  #
   def indent(levels = 1, string_ = IndentedIO.default_indent, string: string_, bol: nil, &block)
     block.nil? || block.arity <= 1 or raise IndentedIO::Error.new "Wrong number of parameters"
     obj = IndentedIO::IndentedIO.send(:new, $stdout, levels, string, bol)
@@ -32,10 +37,14 @@ module Kernel
           $stdout = saved_stdout
         end
       end
+      r
     else
-      r = obj
+      $stdout = obj
     end
-    r
+  end
+
+  def undent
+    $stdout = $stdout.send(:parent)
   end
 end
 

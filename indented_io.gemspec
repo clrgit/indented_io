@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{
                           IndentedIO extends Kernel, IO, and StringIO with an
                           #indent method that redefines #print, printf, #puts,
-                          and #p to print their output indented. Indentations 
+                          and #p to print their output indented. Indentations
                           are stacked so that each new indentation adds to the
                           previous indendation
                        }
@@ -25,4 +25,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "string-text"
+
 end

@@ -9,7 +9,7 @@ describe IndentedIO::IndentedIO do
   it 'forwards method to the underlying device' do
     string_io = dev.indent
     io_io = $stdout.indent
-    # kernel_io = Kernel.indent - when using Kernel we really use $stdout 
+    # kernel_io = Kernel.indent - when using Kernel we really use $stdout
     expect(string_io.respond_to?(:string)).to eq(true)
     expect(io_io.respond_to?(:close)).to eq(true)
     # expect(kernel_io.respond_to?(:system)).to eq(true)
@@ -63,7 +63,7 @@ describe IndentedIO::IndentedIO do
 #     out = out.indent(-1, '*').print "Hello"
 #     expect(res).to eq " *Hello"
 #   end
-  
+
     it 'uses sibling indent for defaults' do
       out = dev.indent(1, '>')
       out.indent(-1).indent.print "Hello"
@@ -123,7 +123,7 @@ describe IndentedIO::IndentedIO do
   end
 
   describe "#indent" do
-    include_examples "indent method", IndentedIO::IndentedIO do 
+    include_examples "indent method", IndentedIO::IndentedIO do
       let(:dev) { StringIO.new }
       let(:recv) { dev.indent(0, "  ") }
       def result() r = dev.string; dev.string = ""; r end
