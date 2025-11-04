@@ -1,4 +1,4 @@
-require 'indented_io/indented_io_interface'
+require_relative 'indented_io_interface'
 
 require "tempfile"
 

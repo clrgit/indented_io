@@ -1,4 +1,4 @@
-require 'indented_io/indented_io_interface'
+require_relative 'indented_io_interface'
 
 module IndentedIO
   # An IO device that writes indented text by reimplementing #write, #print,
@@ -6,7 +6,7 @@ module IndentedIO
   #
   # IndentedIO objects forms a chain that acts as a stack. The lowest element
   # in the stack is always a "pure" IO object (eg. $stdout). IndentedIO object
-  # are than moved on and off the stack as indentation levels rise or fall
+  # are then moved on and off the stack as indentation levels rise or fall
   #
   # Note that #new is private. The only way to create a IndentedIO object is to
   # call #indent on an object that supports it ({Kernel}, {IO}, or {StringIO})
@@ -137,7 +137,7 @@ module IndentedIO
     def initialize(parent, levels, this_indent, bol)
       if levels < 0
         parent.is_a?(::IndentedIO::IndentedIO) or raise ::IndentedIO::Error.new "Negative levels argument"
-        parent.levels + levels >= 0 or raise ::IndentedIO::Error.new "levels out of range"
+        parent.levels + levels >= 0 or raise ::IndentedIO::Error.new "Levels out of range"
         sibling = parent
         while parent.is_a?(::IndentedIO::IndentedIO) && levels < 0
           levels += parent.levels
