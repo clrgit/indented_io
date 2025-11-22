@@ -135,6 +135,7 @@ module IndentedIO
 
     # TODO: Move multi-level functionality to ::IndentedIO.indent
     def initialize(parent, levels, this_indent, bol)
+      levels = levels.is_a?(Integer) ? levels : (levels && 1 || 0)
       if levels < 0
         parent.is_a?(::IndentedIO::IndentedIO) or raise ::IndentedIO::Error.new "Negative levels argument"
         parent.levels + levels >= 0 or raise ::IndentedIO::Error.new "Levels out of range"

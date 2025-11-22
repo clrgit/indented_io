@@ -1,5 +1,5 @@
 module IndentedIO
-  # IndentedIO interface that provides the #indent method. It is used by IO,
+  # IndentedIO interface provide the #indent method. It is used by IO,
   # StringIO, and IndentedIO but can be included in any class that define a
   # #write method like this:
   #
@@ -37,7 +37,6 @@ module IndentedIO
     # true
     #
     def indent(levels = 1, string_ = ::IndentedIO.default_indent, string: string_, bol: nil, &block)
-      levels = levels.is_a?(Integer) ? levels : (levels && 1 || 0)
       block.nil? || block.arity == 1 or raise ::IndentedIO::Error.new "Wrong number of block parameters"
       @indented_io_object = ::IndentedIO::IndentedIO.send(:new, self, levels, string, bol)
       block_given? ? yield(@indented_io_object) : @indented_io_object
