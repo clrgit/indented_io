@@ -1,3 +1,4 @@
+require 'stringio'
 require_relative 'stringio' # Required to avoid 'superclass mismatch' errors in other modules
 require_relative 'indented_io_interface'
 
