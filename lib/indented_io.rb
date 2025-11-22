@@ -1,14 +1,14 @@
 
-require 'indented_io/version'
-require 'indented_io/error'
-require 'indented_io/indented_io'
-require 'indented_io/indented_io_interface'
-require 'indented_io/kernel'
-require 'indented_io/io'
-require 'indented_io/stringio'
-require 'indented_io/tempfile'
+require_relative 'indented_io/version'
+require_relative 'indented_io/error'
+require_relative 'indented_io/indented_io'
+require_relative 'indented_io/indented_io_interface'
+require_relative 'indented_io/kernel'
+require_relative 'indented_io/io'
+require_relative 'indented_io/stringio'
+require_relative 'indented_io/tempfile'
 
-# IndentedIO module. See {IndentedIO::IndentedIO} for documentation on how to 
+# IndentedIO module. See {IndentedIO::IndentedIO} for documentation on how to
 # use this module
 #
 module IndentedIO

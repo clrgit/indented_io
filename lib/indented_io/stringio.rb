@@ -1,5 +1,5 @@
-require 'stringio' # Requiered to avoid 'superclass mismatch' errors in other modules
-require 'indented_io/indented_io_interface'
+require_relative 'stringio' # Required to avoid 'superclass mismatch' errors in other modules
+require_relative 'indented_io_interface'
 
 # Includes the IndentedIOInterface that define the #indent method
 class StringIO

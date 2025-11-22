@@ -1,4 +1,4 @@
-require 'indented_io/indented_io_interface'
+require_relative 'indented_io_interface'
 
 # Includes the IndentedIOInterface that define the #indent method
 class IO
