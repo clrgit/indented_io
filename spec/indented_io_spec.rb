@@ -80,6 +80,22 @@ describe IndentedIO::IndentedIO do
     end
   end
 
+  context "when initialized with 'true'" do
+    it "use the default indentation" do
+      out = dev.indent(true, ">")
+      out.print "Hi"
+      expect(res).to eq ">Hi"
+    end
+  end
+
+  context "wehn initialized with 'false'" do
+    it "does not indent" do
+      out = dev.indent(false, ">")
+      out.print "Hi"
+      expect(res).to eq "Hi"
+    end
+  end
+
   context "when initialized with an indentation string" do
     it 'uses the indentation string' do
       dev.indent(1, ">>").print "*"
