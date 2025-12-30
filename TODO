@@ -1,28 +1,34 @@
 
 TODO
-  o Make the folowing wotk
-        # Shorthand for
-        #   puts "Header"
-        #   indent { puts content }
-        #
-        puts "Header", indent, content
+  o Add a pindent
+      pindent "Text" { block }
+    same as
+      puts "Text"; indent { block }
 
-        # Shorthand for
-        #   puts "Header"
-        #   indent { recurse }
-        puts "Header", indent { recurse }
+  o Indent-content
+      # Shorthand for
+      #   puts "Header"
+      #   indent { puts content }
+      #
+      puts "Header", indent, content
+
+  o Jump-indent (or rather "jump-unindent"): Generalize array expansion to
+
+    * If a line is unindented to column 1, then all text until (and including)
+      the next column 1 line is indented to the original indent. Only works if
+      the first line of the source is indented (indent level > 1)
 
   o Fix "goes wrong" in spec/indented_io_spec.rb by making
     IndentedIOInterface#indent create a IndentedIO object for each level. This
     may require blocks to pop-off multiple levels
   o Fix that #indent is defined on _all_ objects!
-  o Find a solution for the inclusion of StringIO and Tempfile (the last is 
+  o Find a solution for the inclusion of StringIO and Tempfile (the last is
     required by ruby 2.7 - see also note in lib/indented_io/tempfile.rb
   o Check if IO object is writable - no good solution ?
   o better name for @this_indent ? 'string' ?
   o Reimplement core loop in C
   o Create InitialIndentedIO to hold bol status and remove it from IndentedIO
-  o Transmogrify instances variables and protected methods in IndentedIO to 
+  o Transmogrify instances variables and protected methods in IndentedIO to
     avoid collision with names from the underlying device
   o Explain name collision issues in the docs
 
@@ -32,7 +38,7 @@ TODO
   + Oops. #print reimplemention doesn't do this:
      If the output field separator ($,) is not nil, it is inserted between
      objects. If the output record separator ($\) is not nil, it is appended to
-     the output 
+     the output
   + Tests for #write
   + explain bol
   + Allow a symbolic :string argument
