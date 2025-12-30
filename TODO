@@ -2,8 +2,16 @@
 TODO
   o Add a pindent
       pindent "Text" { block }
+      ^ doesn't work, instead
+      pindent "Text" do block end
     same as
       puts "Text"; indent { block }
+
+    Maybe not, saves only a single character
+
+  o Alternatively
+      puts "Text", indent { block }
+    if we make a rule that #indent with a block returns an indented string
 
   o Indent-content
       # Shorthand for
