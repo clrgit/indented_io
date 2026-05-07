@@ -96,7 +96,7 @@ def legacy(phrase)
 end
 
 legacy('Not indented')
-indent { legacy('Indented' }
+indent { legacy('Indented') }
 
 # Not indented
 #   Indented
@@ -106,7 +106,7 @@ still possible use `Kernel#indent` with a block argument if needed
 
 #### bol - Beginning-Of-Line argument
 
-`#indent` takes a symbolic `:bol` argument (`true` or `false`, default `true`) 
+`#indent` takes a symbolic `:bol` argument (`true` or `false`, default `true`)
 that specify if the output device is at the beginning of a line and that printing
 should start with an indentation string:
 
@@ -131,7 +131,7 @@ indent.puts "Indented by #{IndentedIO.default_indent.inspect}"
 ```
 
 The default at start-up is two spaces. It should normally be set only once
-at the start of the program. Use the indent string argument to `#indent` 
+at the start of the program. Use the indent string argument to `#indent`
 to get a different indentation for a part of the program
 
 ## Exceptions
